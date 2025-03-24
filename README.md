@@ -1,3 +1,4 @@
+USE PYTHON 3.11 for autogen-ext[video-surfer]==0.4.9 to work. Check update logs for news if this has changed
 # Magentic-One, Sample Implementation using Streamlit
 This is a repo to demostrate an implementation of Magentic-One, using Streamlit and Microsoft Autogen 0.4. The deployment is done via GitOps (Flux and Kustomize) with Kubernetes, and the python apps can run locally as well without deploying to Kubernetes.
 
