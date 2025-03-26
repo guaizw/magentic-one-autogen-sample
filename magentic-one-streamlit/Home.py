@@ -1,3 +1,4 @@
+import sys
 import streamlit as st
 import asyncio
 import time
@@ -6,6 +7,10 @@ from dotenv import load_dotenv
 from autogen_ext.models.openai import OpenAIChatCompletionClient, AzureOpenAIChatCompletionClient
 from autogen_ext.teams.magentic_one import MagenticOne
 from autogen_ext.code_executors.local import LocalCommandLineCodeExecutor
+
+# Set Windows event loop policy for windows systems
+if sys.platform == "win32":
+    asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
 
 load_dotenv()
 
@@ -57,7 +62,6 @@ async def run_task(user_prompt: str, USE_AOAI, model_name=None):
             model=os.getenv('OPEN_AI_MODEL_NAME'),
             api_key=os.getenv('OPEN_AI_API_KEY')
         )
-
     m1 = MagenticOne(client=client, code_executor=LocalCommandLineCodeExecutor())
     async for chunk in m1.run_stream(task=user_prompt):
         if chunk.__class__.__name__ != 'TaskResult':
