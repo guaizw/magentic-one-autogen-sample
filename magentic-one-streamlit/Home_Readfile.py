@@ -9,6 +9,10 @@ from autogen_ext.code_executors.local import LocalCommandLineCodeExecutor
 # from autogen.code_utils import create_virtual_env
 import sys
 
+# Set Windows event loop policy for windows systems
+if sys.platform == "win32":
+    asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
+
 load_dotenv()
 
 def format_source_display(source):
